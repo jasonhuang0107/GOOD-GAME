@@ -10,6 +10,19 @@ const restartButton = document.getElementById('restart-button');
 const speedSlider = document.getElementById('speed-slider');
 const speedDisplay = document.getElementById('speed-display');
 
+// New DOM elements for welcome and high scores screens
+const welcomeScreen = document.getElementById('welcome-screen');
+const playerNameInput = document.getElementById('player-name');
+const modeSelection = document.querySelector('.mode-selection');
+const startGameButton = document.getElementById('start-game-button');
+const viewHighScoresButton = document.getElementById('view-high-scores-button');
+const gameScreen = document.getElementById('game-screen');
+const backToMenuButton = document.getElementById('back-to-menu-button');
+const highScoresScreen = document.getElementById('high-scores-screen');
+const highScoresList = document.getElementById('high-scores-list');
+const backFromScoresButton = document.getElementById('back-from-scores-button');
+
+
 let currentWord = '';
 let score = 0;
 let time = 0;
@@ -18,6 +31,9 @@ let gameInterval;
 let wordInterval;
 let typingStartTime;
 let currentSpeedLevel = 5; // Default speed level (1-10)
+let gameMode = 'speed'; // Default game mode
+let playerName = '匿名玩家';
+let highScores = JSON.parse(localStorage.getItem('typingHighScores')) || [];
 
 // Define 10 speed stages (interval in milliseconds)
 const speedStages = Array.from({ length: 10 }, (_, i) => 5000 - i * 300);
@@ -51,6 +67,35 @@ function getRandomWord() {
     return currentLevelWords[Math.floor(Math.random() * currentLevelWords.length)];
 }
 
+function showScreen(screenToShow) {
+    welcomeScreen.style.display = 'none';
+    gameScreen.style.display = 'none';
+    gameOverScreen.style.display = 'none';
+    highScoresScreen.style.display = 'none';
+
+    document.getElementById(screenToShow).style.display = 'flex';
+}
+
+function showWelcomeScreen() {
+    showScreen('welcome-screen');
+    playerNameInput.value = playerName;
+}
+
+function showGameScreen() {
+    showScreen('game-screen');
+    textInput.focus();
+}
+
+function showGameOverScreen() {
+    showScreen('game-over-screen');
+    finalScoreSpan.textContent = score;
+}
+
+function showHighScoresScreen() {
+    showScreen('high-scores-screen');
+    displayHighScores();
+}
+
 function displayNewWord() {
     currentWord = getRandomWord();
     wordDisplay.textContent = currentWord;
@@ -74,9 +119,28 @@ function startGame() {
     scoreSpan.textContent = score;
     timeSpan.textContent = time;
     levelSpan.textContent = level;
-    gameOverScreen.style.display = 'none';
     textInput.disabled = false;
     textInput.value = '';
+
+    // Game mode specific initializations
+    if (gameMode === 'speed') {
+        // Speed mode: 10 levels, normal speed progression
+        levelSpan.textContent = `${level}/10`;
+        currentSpeedLevel = 5; // Default speed for speed mode
+        speedSlider.value = currentSpeedLevel;
+        speedSlider.style.display = 'none'; // Hide speed slider in speed mode
+    } else if (gameMode === 'breakthrough') {
+        // Breakthrough mode: Start slow, speed up per level
+        levelSpan.textContent = `${level}/10`;
+        currentSpeedLevel = 1; // Start at slowest speed
+        speedSlider.value = currentSpeedLevel;
+        speedSlider.style.display = 'none'; // Hide speed slider in breakthrough mode
+    } else if (gameMode === 'practice') {
+        // Practice mode: Infinite levels, controllable speed
+        levelSpan.textContent = `無限`;
+        speedSlider.style.display = 'inline-block'; // Show speed slider in practice mode
+    }
+    updateSpeedDisplay(); // Update display based on new speedLevel
 
     displayNewWord();
 
@@ -85,20 +149,22 @@ function startGame() {
         timeSpan.textContent = time;
     }, 1000);
 
-    startButton.textContent = '重新開始';
+    showGameScreen();
 }
 
 function endGame() {
     clearInterval(gameInterval);
     clearInterval(wordInterval);
     textInput.disabled = true;
-    finalScoreSpan.textContent = score;
-    gameOverScreen.style.display = 'flex';
-    startButton.textContent = '開始遊戲'; // Reset button text for next game
+    
+    if (gameMode === 'speed') {
+        saveHighScore(playerName, score);
+    }
+    showGameOverScreen();
 }
 
 function resetGame() {
-    endGame();
+    endGame(); // Ensure intervals are cleared
     score = 0;
     time = 0;
     level = 1;
@@ -108,21 +174,63 @@ function resetGame() {
     textInput.value = '';
     currentWord = '';
     wordDisplay.textContent = '點擊開始遊戲';
-    gameOverScreen.style.display = 'none';
-    startButton.textContent = '開始遊戲';
+    // gameOverScreen.style.display = 'none'; // Handled by showScreen
+    startButton.textContent = '重新開始'; // Reset button text for next game screen
+    
+    // After resetting, go back to welcome screen
+    showWelcomeScreen();
+}
+
+function saveHighScore(player, finalScore) {
+    const newScore = { name: player, score: finalScore, date: new Date().toLocaleString() };
+    highScores.push(newScore);
+    highScores.sort((a, b) => b.score - a.score); // Sort descending
+    highScores = highScores.slice(0, 10); // Keep only top 10
+    localStorage.setItem('typingHighScores', JSON.stringify(highScores));
+}
+
+function displayHighScores() {
+    highScoresList.innerHTML = ''; // Clear existing list
+    if (highScores.length === 0) {
+        highScoresList.innerHTML = '<li>目前沒有最高分紀錄。</li>';
+        return;
+    }
+    highScores.forEach((scoreEntry, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `<span>${index + 1}. ${scoreEntry.name}</span><span>${scoreEntry.score}分 (${scoreEntry.date})</span>`;
+        highScoresList.appendChild(li);
+    });
 }
 
 // Event Listeners
-startButton.addEventListener('click', () => {
-    if (startButton.textContent === '開始遊戲') {
-        startGame();
-    } else {
-        resetGame();
+startGameButton.addEventListener('click', () => {
+    playerName = playerNameInput.value || '匿名玩家';
+    const selectedMode = document.querySelector('input[name="game-mode"]:checked');
+    if (selectedMode) {
+        gameMode = selectedMode.value;
     }
+    startGame();
+});
+
+viewHighScoresButton.addEventListener('click', () => {
+    showHighScoresScreen();
+});
+
+backToMenuButton.addEventListener('click', () => {
+    showWelcomeScreen();
+});
+
+backFromScoresButton.addEventListener('click', () => {
+    showWelcomeScreen();
+});
+
+startButton.addEventListener('click', () => {
+    // In game-screen, startButton is '重新開始' to reset current game
+    resetGame();
 });
 
 restartButton.addEventListener('click', () => {
-    startGame();
+    startGame(); // In game-over-screen, restartButton starts a new game with current settings
 });
 
 textInput.addEventListener('input', (e) => {
@@ -139,11 +247,32 @@ textInput.addEventListener('input', (e) => {
         score += Math.max(0, 10 - Math.floor(timeTaken)); // Score based on speed
         scoreSpan.textContent = score;
 
-        level++;
-        if (level > 10) {
-            endGame();
-        } else {
-            levelSpan.textContent = level;
+        // Game mode specific level progression
+        if (gameMode === 'speed') {
+            level++;
+            if (level > 10) {
+                endGame();
+            } else {
+                levelSpan.textContent = `${level}/10`;
+                displayNewWord();
+            }
+        } else if (gameMode === 'breakthrough') {
+            level++;
+            if (level > 10) {
+                endGame(); // 10 questions per level
+            } else {
+                // Increase speed for next level
+                if (currentSpeedLevel < 10) {
+                    currentSpeedLevel++;
+                    speedSlider.value = currentSpeedLevel;
+                    updateSpeedDisplay();
+                }
+                levelSpan.textContent = `${level}/10`;
+                displayNewWord();
+            }
+        } else if (gameMode === 'practice') {
+            level++; // Infinite levels
+            levelSpan.textContent = `無限 (關卡 ${level})`;
             displayNewWord();
         }
     }
@@ -173,3 +302,4 @@ function updateSpeedDisplay() {
 wordDisplay.textContent = '點擊開始遊戲';
 textInput.disabled = true;
 updateSpeedDisplay();
+showWelcomeScreen(); // Show welcome screen on initial load

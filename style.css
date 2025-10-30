@@ -20,6 +20,85 @@ body {
     border: 3px solid #b8860b; /* Golden border */
 }
 
+.welcome-screen,
+.game-screen,
+.high-scores-screen {
+    padding: 20px;
+}
+
+.welcome-screen h2,
+.high-scores-screen h2 {
+    color: #b8860b;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.player-name-input {
+    margin-bottom: 20px;
+}
+
+.player-name-input label {
+    font-size: 1.1em;
+    color: #6a5340;
+    margin-right: 10px;
+}
+
+.player-name-input input[type="text"] {
+    padding: 8px;
+    border: 2px solid #cd853f;
+    border-radius: 5px;
+    font-size: 1em;
+    text-align: center;
+    background-color: #fffaf0;
+    color: #4a3c2b;
+}
+
+.mode-selection {
+    margin-bottom: 25px;
+}
+
+.mode-selection label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    color: #4a3c2b;
+    cursor: pointer;
+}
+
+.mode-selection input[type="radio"] {
+    margin-right: 10px;
+    transform: scale(1.2); /* Slightly larger radio buttons */
+}
+
+.high-scores-screen ol {
+    list-style: none;
+    padding: 0;
+    max-height: 250px;
+    overflow-y: auto;
+    border: 1px solid #cd853f;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    background-color: #fff8dc;
+}
+
+.high-scores-screen li {
+    padding: 10px;
+    border-bottom: 1px dashed #deb887;
+    color: #8b4513;
+    font-size: 1.1em;
+    display: flex;
+    justify-content: space-between;
+}
+
+.high-scores-screen li:last-child {
+    border-bottom: none;
+}
+
+.high-scores-screen li span:first-child {
+    font-weight: bold;
+}
+
+
 h1 {
     color: #b8860b; /* Gold for the title */
     margin-bottom: 20px;
@@ -173,5 +252,60 @@ button:hover {
 
 .game-over-screen button:hover {
     background-color: #cd853f; /* Earthy hover color */
+}
+
+#start-game-button, #view-high-scores-button, #back-to-menu-button, #back-from-scores-button {
+    margin-top: 15px;
+    background-color: #b8860b; /* Golden buttons */
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#start-game-button:hover, #view-high-scores-button:hover, #back-to-menu-button:hover, #back-from-scores-button:hover {
+    background-color: #cd853f; /* Earthy hover color */
+    transform: translateY(-2px);
+}
+
+/* Egyptian Cartoon Art */
+.pyramid {
+    position: absolute;
+    width: 250px;
+    height: 200px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: -1;
+    opacity: 0.8;
+}
+
+.pyramid.left {
+    background-image: url('https://i.imgur.com/rN5Q9bZ.png'); /* Example pyramid image */
+    bottom: 0;
+    left: -50px;
+}
+
+.pyramid.right {
+    background-image: url('https://i.imgur.com/rN5Q9bZ.png'); /* Example pyramid image */
+    bottom: 0;
+    right: -50px;
+    transform: scaleX(-1); /* Flip horizontally */
+}
+
+.sphinx {
+    position: absolute;
+    width: 200px;
+    height: 150px;
+    background-image: url('https://i.imgur.com/gK2R0g2.png'); /* Example sphinx image */
+    background-size: contain;
+    background-repeat: no-repeat;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: -1;
+    opacity: 0.8;
 }
 

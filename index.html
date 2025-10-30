@@ -9,27 +9,66 @@
 <body>
     <div class="game-container">
         <h1>中文打字遊戲</h1>
-        <div class="stats">
-            <p>分數: <span id="score">0</span></p>
-            <p>時間: <span id="time">0</span>s</p>
-            <p>關卡: <span id="level">1</span>/10</p>
+
+        <div class="welcome-screen" id="welcome-screen">
+            <div class="player-name-input">
+                <label for="player-name">玩家名稱:</label>
+                <input type="text" id="player-name" placeholder="輸入你的名字">
+            </div>
+            <div class="mode-selection">
+                <h2>選擇遊戲模式:</h2>
+                <label>
+                    <input type="radio" name="game-mode" value="speed" checked> 競速模式 (10關)
+                </label>
+                <label>
+                    <input type="radio" name="game-mode" value="breakthrough"> 破關模式 (每關10題, 速度提升)
+                </label>
+                <label>
+                    <input type="radio" name="game-mode" value="practice"> 練習模式 (無限關卡, 自由調速)
+                </label>
+            </div>
+            <button id="start-game-button">開始遊戲</button>
+            <button id="view-high-scores-button">查看成績</button>
         </div>
-        <div class="word-display" id="word-display"></div>
-        <input type="text" class="text-input" id="text-input" placeholder="在這裡輸入中文" autofocus>
-        <div class="controls">
-            <button id="start-button">開始遊戲</button>
-            <div class="speed-controls">
-                <span>速度:</span>
-                <input type="range" id="speed-slider" min="1" max="10" value="5">
-                <span id="speed-display">中等</span>
+
+        <div class="game-screen" id="game-screen" style="display: none;">
+            <div class="stats">
+                <p>分數: <span id="score">0</span></p>
+                <p>時間: <span id="time">0</span>s</p>
+                <p>關卡: <span id="level">1</span>/10</p>
+            </div>
+            <div class="word-display" id="word-display"></div>
+            <input type="text" class="text-input" id="text-input" placeholder="在這裡輸入中文" autofocus>
+            <div class="controls">
+                <button id="start-button">重新開始</button>
+                <div class="speed-controls">
+                    <span>速度:</span>
+                    <input type="range" id="speed-slider" min="1" max="10" value="5">
+                    <span id="speed-display">中等</span>
+                </div>
             </div>
         </div>
+
         <div class="game-over-screen" id="game-over-screen">
             <h2>遊戲結束！</h2>
             <p>最終分數: <span id="final-score">0</span></p>
             <button id="restart-button">重新開始</button>
+            <button id="back-to-menu-button">返回主選單</button>
+        </div>
+
+        <div class="high-scores-screen" id="high-scores-screen" style="display: none;">
+            <h2>最高分紀錄</h2>
+            <ol id="high-scores-list">
+                <!-- High scores will be inserted here by JavaScript -->
+            </ol>
+            <button id="back-from-scores-button">返回主選單</button>
         </div>
     </div>
+
+    <div class="pyramid left"></div>
+    <div class="pyramid right"></div>
+    <div class="sphinx"></div>
+
     <script src="script.js"></script>
 </body>
 </html>
