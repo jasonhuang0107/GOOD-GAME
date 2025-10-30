@@ -20,9 +20,8 @@
             <button id="start-button">開始遊戲</button>
             <div class="speed-controls">
                 <span>速度:</span>
-                <button id="speed-slow" class="active">慢</button>
-                <button id="speed-medium">中</button>
-                <button id="speed-fast">快</button>
+                <input type="range" id="speed-slider" min="1" max="10" value="5">
+                <span id="speed-display">中等</span>
             </div>
         </div>
         <div class="game-over-screen" id="game-over-screen">

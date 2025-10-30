@@ -4,12 +4,11 @@ const scoreSpan = document.getElementById('score');
 const timeSpan = document.getElementById('time');
 const levelSpan = document.getElementById('level');
 const startButton = document.getElementById('start-button');
-const speedSlowButton = document.getElementById('speed-slow');
-const speedMediumButton = document.getElementById('speed-medium');
-const speedFastButton = document.getElementById('speed-fast');
 const gameOverScreen = document.getElementById('game-over-screen');
 const finalScoreSpan = document.getElementById('final-score');
 const restartButton = document.getElementById('restart-button');
+const speedSlider = document.getElementById('speed-slider');
+const speedDisplay = document.getElementById('speed-display');
 
 let currentWord = '';
 let score = 0;
@@ -18,7 +17,10 @@ let level = 1;
 let gameInterval;
 let wordInterval;
 let typingStartTime;
-let currentSpeed = 'medium'; // Default speed
+let currentSpeedLevel = 5; // Default speed level (1-10)
+
+// Define 10 speed stages (interval in milliseconds)
+const speedStages = Array.from({ length: 10 }, (_, i) => 2500 - i * 200);
 
 const wordsByLevel = [
     // Level 1: Simple words (2-3 characters)
@@ -43,12 +45,6 @@ const wordsByLevel = [
     ["祝你生日快樂", "新年快樂", "聖誕快樂", "母親節快樂", "父親節快樂", "中秋節快樂", "端午節快樂", "我愛你", "謝謝你的幫助", "天氣真好"]
 ];
 
-const speedSettings = {
-    'slow': 2000,   // 2 seconds per word
-    'medium': 1500, // 1.5 seconds per word
-    'fast': 1000    // 1 second per word
-};
-
 // Helper functions
 function getRandomWord() {
     const currentLevelWords = wordsByLevel[level - 1];
@@ -68,7 +64,7 @@ function displayNewWord() {
         score -= 5; // Penalty for not typing in time
         scoreSpan.textContent = score;
         displayNewWord();
-    }, speedSettings[currentSpeed]);
+    }, speedStages[currentSpeedLevel - 1]);
 }
 
 function startGame() {
@@ -147,45 +143,27 @@ textInput.addEventListener('input', (e) => {
     }
 });
 
-speedSlowButton.addEventListener('click', () => {
-    currentSpeed = 'slow';
-    updateSpeedButtons();
+speedSlider.addEventListener('input', (e) => {
+    currentSpeedLevel = parseInt(e.target.value);
+    updateSpeedDisplay();
     if (gameInterval) { // Only reset if game is active
         displayNewWord();
     }
 });
 
-speedMediumButton.addEventListener('click', () => {
-    currentSpeed = 'medium';
-    updateSpeedButtons();
-    if (gameInterval) {
-        displayNewWord();
+function updateSpeedDisplay() {
+    let speedText = '';
+    if (currentSpeedLevel <= 3) {
+        speedText = '慢';
+    } else if (currentSpeedLevel <= 7) {
+        speedText = '中等';
+    } else {
+        speedText = '快';
     }
-});
-
-speedFastButton.addEventListener('click', () => {
-    currentSpeed = 'fast';
-    updateSpeedButtons();
-    if (gameInterval) {
-        displayNewWord();
-    }
-});
-
-function updateSpeedButtons() {
-    speedSlowButton.classList.remove('active');
-    speedMediumButton.classList.remove('active');
-    speedFastButton.classList.remove('active');
-
-    if (currentSpeed === 'slow') {
-        speedSlowButton.classList.add('active');
-    } else if (currentSpeed === 'medium') {
-        speedMediumButton.classList.add('active');
-    } else if (currentSpeed === 'fast') {
-        speedFastButton.classList.add('active');
-    }
+    speedDisplay.textContent = speedText + ` (階段 ${currentSpeedLevel})`;
 }
 
 // Initial setup
 wordDisplay.textContent = '點擊開始遊戲';
 textInput.disabled = true;
-updateSpeedButtons();
+updateSpeedDisplay();
