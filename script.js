@@ -20,7 +20,7 @@ let typingStartTime;
 let currentSpeedLevel = 5; // Default speed level (1-10)
 
 // Define 10 speed stages (interval in milliseconds)
-const speedStages = Array.from({ length: 10 }, (_, i) => 2500 - i * 200);
+const speedStages = Array.from({ length: 10 }, (_, i) => 5000 - i * 300);
 
 const wordsByLevel = [
     // Level 1: Simple words (2-3 characters)
