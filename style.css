@@ -1,93 +1,133 @@
 body {
-    font-family: 'Times New Roman', serif; /* A more classic font */
+    font-family: 'Cinzel Decorative', cursive, 'Times New Roman', serif; /* Epic and classic font */
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    background: linear-gradient(to bottom, #f0e68c, #deb887); /* Sandy gradient background */
-    color: #4a3c2b; /* Darker text for contrast */
+    background: linear-gradient(to bottom, #f0e68c, #deb887), url('https://i.imgur.com/vH1lHl2.png'); /* Sandy gradient with subtle papyrus texture */
+    background-blend-mode: multiply;
+    background-size: cover;
+    background-position: center;
+    color: #3b2c1f; /* Deep earthy brown */
+    position: relative; /* For absolute positioning of decorative elements */
+    overflow: hidden; /* Hide overflowing decorations */
 }
 
 .game-container {
-    background-color: rgba(255, 255, 255, 0.85); /* Slightly transparent white for a papyrus feel */
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Stronger shadow */
+    background-color: rgba(255, 255, 255, 0.1); /* Very subtle transparency */
+    backdrop-filter: blur(5px); /* Frosted glass effect */
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 215, 0, 0.3); /* Stronger shadow with golden inner glow */
     text-align: center;
-    width: 90%;
-    max-width: 600px;
-    border: 3px solid #b8860b; /* Golden border */
+    width: 95%;
+    max-width: 700px;
+    border: 5px solid #ffd700; /* Prominent gold border */
+    position: relative;
+    z-index: 10;
+    overflow: hidden;
+}
+
+h1 {
+    font-family: 'Cinzel Decorative', cursive; /* Use for major titles */
+    color: #ffd700; /* Bright gold for title */
+    margin-bottom: 30px;
+    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.6), 0 0 15px rgba(255, 215, 0, 0.8); /* Dramatic shadow with glow */
+    font-size: 3.5em; /* Larger title */
 }
 
 .welcome-screen,
 .game-screen,
 .high-scores-screen {
-    padding: 20px;
+    padding: 25px;
+    background-color: rgba(0, 0, 0, 0.3); /* Darker, more atmospheric background for screens */
+    border-radius: 10px;
+    margin-top: 20px;
+    border: 2px solid #b8860b; /* Earthy border */
 }
 
 .welcome-screen h2,
 .high-scores-screen h2 {
-    color: #b8860b;
-    margin-bottom: 15px;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    font-family: 'Cinzel Decorative', cursive;
+    color: #f0e68c; /* Lighter sandy color for sub-titles */
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
+    font-size: 2em;
 }
 
 .player-name-input {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 .player-name-input label {
-    font-size: 1.1em;
-    color: #6a5340;
-    margin-right: 10px;
+    font-size: 1.3em;
+    color: #deb887; /* Sandy color for label */
+    margin-right: 15px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .player-name-input input[type="text"] {
-    padding: 8px;
-    border: 2px solid #cd853f;
-    border-radius: 5px;
-    font-size: 1em;
+    padding: 10px;
+    border: 3px solid #ffd700; /* Gold border */
+    border-radius: 8px;
+    font-size: 1.2em;
     text-align: center;
-    background-color: #fffaf0;
-    color: #4a3c2b;
+    background-color: rgba(255, 255, 255, 0.1); /* Transparent input */
+    color: #f0e68c; /* Sandy text color */
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+}
+
+.player-name-input input[type="text"]:focus {
+    outline: none;
+    border-color: #b8860b; /* Darker gold on focus */
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.7), 0 0 15px rgba(255, 215, 0, 0.5); /* Enhanced shadow and glow */
 }
 
 .mode-selection {
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 }
 
 .mode-selection label {
     display: block;
-    margin-bottom: 10px;
-    font-size: 1.1em;
-    color: #4a3c2b;
+    margin-bottom: 12px;
+    font-size: 1.2em;
+    color: #e6e6fa; /* Light purple for options */
     cursor: pointer;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .mode-selection input[type="radio"] {
-    margin-right: 10px;
-    transform: scale(1.2); /* Slightly larger radio buttons */
+    margin-right: 15px;
+    transform: scale(1.4); /* Larger radio buttons */
+    accent-color: #ffd700; /* Gold radio button color */
 }
 
 .high-scores-screen ol {
     list-style: none;
     padding: 0;
-    max-height: 250px;
+    max-height: 300px;
     overflow-y: auto;
-    border: 1px solid #cd853f;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    background-color: #fff8dc;
+    border: 2px solid #b8860b; /* Earthy border */
+    border-radius: 8px;
+    margin-bottom: 25px;
+    background-color: rgba(0, 0, 0, 0.2); /* Slightly transparent background */
 }
 
 .high-scores-screen li {
-    padding: 10px;
-    border-bottom: 1px dashed #deb887;
-    color: #8b4513;
-    font-size: 1.1em;
+    padding: 12px;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.3); /* Subtle golden separator */
+    color: #f0e68c; /* Sandy color for score entries */
+    font-size: 1.2em;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.high-scores-screen li:hover {
+    background-color: rgba(255, 215, 0, 0.1); /* Slight golden highlight on hover */
 }
 
 .high-scores-screen li:last-child {
@@ -96,126 +136,146 @@ body {
 
 .high-scores-screen li span:first-child {
     font-weight: bold;
-}
-
-
-h1 {
-    color: #b8860b; /* Gold for the title */
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Add some depth */
+    color: #ffd700; /* Gold for rank and name */
 }
 
 .stats {
     display: flex;
     justify-content: space-around;
-    margin-bottom: 20px;
-    font-size: 1.2em;
-    color: #6a5340; /* Brownish tone for stats */
+    margin-bottom: 25px;
+    font-size: 1.3em;
+    color: #f0e68c; /* Sandy color for stats */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
 }
 
 .word-display {
-    font-family: 'serif', cursive; /* More decorative font for the word */
-    font-size: 3em; /* Larger font size */
-    margin-bottom: 20px;
-    padding: 15px;
-    border: 2px solid #cd853f; /* Earthy border */
-    border-radius: 8px;
-    min-height: 60px; /* Taller display */
+    font-family: 'Cinzel Decorative', cursive; /* Epic font for word display */
+    font-size: 4em; /* Very large font size */
+    margin-bottom: 25px;
+    padding: 20px;
+    border: 3px solid #ffd700; /* Thick gold border */
+    border-radius: 12px;
+    min-height: 80px; /* Taller display */
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #fff8dc; /* Lighter background for word display */
-    color: #8b4513; /* Darker brown for word */
+    background-color: rgba(0, 0, 0, 0.4); /* Darker transparent background */
+    color: #e0e0e0; /* Light grey for word */
     font-weight: bold;
-    transition: background-color 0.3s ease; /* Smooth transition for feedback */
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.1s ease; /* Smooth transition for feedback */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
 }
 
 .correct-feedback {
     background-color: #ffd700; /* Gold color for correct feedback */
-    color: #ffffff; /* White text on gold */
+    color: #3b2c1f; /* Dark earthy text on gold */
+    transform: scale(1.05); /* Pop effect */
 }
 
 .text-input {
-    width: calc(100% - 20px);
-    padding: 12px;
-    margin-bottom: 20px;
-    border: 2px solid #b8860b; /* Gold border */
-    border-radius: 8px;
-    font-size: 1.3em;
+    width: calc(100% - 40px); /* Adjust width for padding */
+    padding: 15px;
+    margin-bottom: 25px;
+    border: 3px solid #b8860b; /* Earthy gold border */
+    border-radius: 10px;
+    font-size: 1.4em;
     text-align: center;
-    background-color: #fffaf0; /* Light cream background */
-    color: #4a3c2b;
+    background-color: rgba(255, 255, 255, 0.15); /* Slightly transparent light background */
+    color: #f0e68c; /* Sandy text color */
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.6);
+    transition: all 0.3s ease;
 }
 
 .text-input:focus {
     outline: none;
-    border-color: #cd853f; /* Earthy border on focus */
-    box-shadow: 0 0 10px rgba(184, 134, 11, 0.5); /* Goldish shadow */
+    border-color: #ffd700; /* Brighter gold on focus */
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.7); /* Enhanced shadow and glow */
 }
 
 .controls {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 button {
-    background-color: #cd853f; /* Earthy button color */
+    font-family: 'Cinzel Decorative', cursive;
+    background-color: #b8860b; /* Darker gold/earthy button color */
     color: white;
     border: none;
-    padding: 12px 25px;
-    border-radius: 5px;
-    font-size: 1.1em;
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-size: 1.2em;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
 }
 
 button:hover {
-    background-color: #b8860b; /* Darker gold on hover */
-    transform: translateY(-2px); /* Slight lift effect */
+    background-color: #ffd700; /* Brighter gold on hover */
+    transform: translateY(-3px) scale(1.02); /* More pronounced lift and slight scale */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4), 0 0 10px rgba(255, 215, 0, 0.7); /* Enhanced shadow and glow */
 }
 
 .speed-controls {
     display: flex;
     align-items: center;
-    color: #6a5340; /* Brownish tone for speed controls */
+    color: #f0e68c; /* Sandy tone for speed controls */
+    font-size: 1.1em;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .speed-controls span {
-    margin-right: 10px;
+    margin-right: 15px;
     font-weight: bold;
 }
 
 #speed-slider {
-    width: 150px;
-    -webkit-appearance: none; /* Override default look */
+    width: 200px; /* Wider slider */
+    -webkit-appearance: none;
     appearance: none;
-    height: 10px;
-    background: #deb887; /* Sandy color for track */
-    border-radius: 5px;
+    height: 12px; /* Thicker track */
+    background: linear-gradient(to right, #b8860b, #ffd700); /* Gold gradient track */
+    border-radius: 6px;
     outline: none;
-    margin: 0 10px;
+    margin: 0 15px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
 #speed-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 20px;
-    height: 20px;
-    background: #b8860b; /* Gold thumb */
+    width: 25px; /* Larger thumb */
+    height: 25px;
+    background: #e0e0e0; /* Silver/white thumb */
     border-radius: 50%;
     cursor: pointer;
-    border: 2px solid #4a3c2b;
+    border: 3px solid #4a3c2b; /* Dark brown border */
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#speed-slider::-webkit-slider-thumb:hover {
+    background-color: #ffd700; /* Gold on hover */
+    transform: scale(1.1); /* Slight scale on hover */
 }
 
 #speed-slider::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
-    background: #b8860b; /* Gold thumb */
+    width: 25px;
+    height: 25px;
+    background: #e0e0e0;
     border-radius: 50%;
     cursor: pointer;
-    border: 2px solid #4a3c2b;
+    border: 3px solid #4a3c2b;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#speed-slider::-moz-range-thumb:hover {
+    background-color: #ffd700;
+    transform: scale(1.1);
 }
 
 .game-over-screen {
@@ -225,25 +285,28 @@ button:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(74, 60, 43, 0.95); /* Darker, themed overlay */
+    background-color: rgba(0, 0, 0, 0.9); /* Almost opaque dark overlay */
     flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: 1000;
-    border-radius: 10px;
+    border-radius: 15px;
+    box-shadow: inset 0 0 50px rgba(255, 215, 0, 0.5); /* Inner golden glow */
 }
 
 .game-over-screen h2 {
+    font-family: 'Cinzel Decorative', cursive;
     color: #ffd700; /* Gold for game over title */
-    font-size: 3.5em;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+    font-size: 4em;
+    margin-bottom: 25px;
+    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.9); /* Dramatic shadow with strong glow */
 }
 
 .game-over-screen p {
-    font-size: 1.8em;
-    margin-bottom: 30px;
+    font-size: 2em;
+    margin-bottom: 40px;
     color: #f0e68c; /* Lighter sandy color for text */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .game-over-screen button {
