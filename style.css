@@ -5,10 +5,7 @@ body {
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    background: linear-gradient(to bottom, #f0e68c, #deb887), url('https://i.imgur.com/vH1lHl2.png'); /* Sandy gradient with subtle papyrus texture */
-    background-blend-mode: multiply;
-    background-size: cover;
-    background-position: center;
+    background: linear-gradient(to bottom, #f0e68c, #deb887); /* Simple sandy gradient background */
     color: #3b2c1f; /* Deep earthy brown */
     position: relative; /* For absolute positioning of decorative elements */
     overflow: hidden; /* Hide overflowing decorations */
@@ -334,25 +331,23 @@ button:hover {
     transform: translateY(-2px);
 }
 
-/* Egyptian Cartoon Art */
+/* Simplified Egyptian Cartoon Art - no external images */
 .pyramid {
     position: absolute;
     width: 250px;
     height: 200px;
-    background-size: contain;
-    background-repeat: no-repeat;
+    background-color: #b8860b; /* Golden color for pyramids */
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%); /* Pyramid shape */
     z-index: -1;
     opacity: 0.8;
 }
 
 .pyramid.left {
-    background-image: url('https://i.imgur.com/rN5Q9bZ.png'); /* Example pyramid image */
     bottom: 0;
     left: -50px;
 }
 
 .pyramid.right {
-    background-image: url('https://i.imgur.com/rN5Q9bZ.png'); /* Example pyramid image */
     bottom: 0;
     right: -50px;
     transform: scaleX(-1); /* Flip horizontally */
@@ -362,9 +357,8 @@ button:hover {
     position: absolute;
     width: 200px;
     height: 150px;
-    background-image: url('https://i.imgur.com/gK2R0g2.png'); /* Example sphinx image */
-    background-size: contain;
-    background-repeat: no-repeat;
+    background-color: #cd853f; /* Earthy color for sphinx */
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0; /* Simple rounded top shape */
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);

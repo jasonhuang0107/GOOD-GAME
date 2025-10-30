@@ -104,12 +104,12 @@ function displayNewWord() {
     typingStartTime = new Date().getTime();
 
     clearInterval(wordInterval);
-    wordInterval = setInterval(() => {
-        // If word not typed in time, count as incorrect and move to next
-        score -= 5; // Penalty for not typing in time
-        scoreSpan.textContent = score;
-        displayNewWord();
-    }, speedStages[currentSpeedLevel - 1]);
+    // wordInterval = setInterval(() => {
+    //     // If word not typed in time, count as incorrect and move to next
+    //     score -= 5; // Penalty for not typing in time
+    //     scoreSpan.textContent = score;
+    //     displayNewWord();
+    // }, speedStages[currentSpeedLevel - 1]);
 }
 
 function startGame() {
@@ -128,7 +128,7 @@ function startGame() {
         levelSpan.textContent = `${level}/10`;
         currentSpeedLevel = 5; // Default speed for speed mode
         speedSlider.value = currentSpeedLevel;
-        speedSlider.style.display = 'none'; // Hide speed slider in speed mode
+        speedSlider.style.display = 'inline-block'; // Show speed slider in speed mode
     } else if (gameMode === 'breakthrough') {
         // Breakthrough mode: Start slow, speed up per level
         levelSpan.textContent = `${level}/10`;
@@ -247,6 +247,9 @@ textInput.addEventListener('input', (e) => {
         score += Math.max(0, 10 - Math.floor(timeTaken)); // Score based on speed
         scoreSpan.textContent = score;
 
+        // Clear the input field immediately upon correct answer
+        textInput.value = '';
+
         // Game mode specific level progression
         if (gameMode === 'speed') {
             level++;
@@ -254,7 +257,7 @@ textInput.addEventListener('input', (e) => {
                 endGame();
             } else {
                 levelSpan.textContent = `${level}/10`;
-                displayNewWord();
+                displayNewWord(); // Only display new word on correct answer
             }
         } else if (gameMode === 'breakthrough') {
             level++;
