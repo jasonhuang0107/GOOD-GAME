@@ -25,24 +25,24 @@ const speedStages = Array.from({ length: 10 }, (_, i) => 5000 - i * 300);
 const wordsByLevel = [
     // Level 1: Simple words (2-3 characters)
     ["你好", "謝謝", "再見", "蘋果", "香蕉", "快樂", "學習", "太陽", "月亮", "星星"],
-    // Level 2: Slightly longer words (3-4 characters)
-    ["電腦", "手機", "學校", "老師", "朋友", "家庭", "早餐", "午餐", "晚餐", "紅色"],
-    // Level 3: Common phrases/more complex words
-    ["圖書館", "博物館", "游泳池", "運動場", "動物園", "超級市場", "公共汽車", "計程車", "火車站", "飛機場"],
-    // Level 4
-    ["台灣", "中國", "美國", "日本", "韓國", "英國", "法國", "德國", "加拿大", "澳洲"],
-    // Level 5
-    ["春天", "夏天", "秋天", "冬天", "一月", "二月", "三月", "四月", "五月", "六月"],
-    // Level 6
-    ["七月", "八月", "九月", "十月", "十一月", "十二月", "星期一", "星期二", "星期三", "星期四"],
-    // Level 7
-    ["星期五", "星期六", "星期日", "早上", "中午", "下午", "晚上", "明天", "昨天", "今天"],
-    // Level 8
-    ["醫生", "護士", "警察", "消防員", "廚師", "工程師", "藝術家", "作家", "音樂家", "運動員"],
-    // Level 9
-    ["唱歌", "跳舞", "畫畫", "讀書", "寫字", "跑步", "游泳", "打球", "吃飯", "睡覺"],
-    // Level 10: Longer phrases/sentences
-    ["祝你生日快樂", "新年快樂", "聖誕快樂", "母親節快樂", "父親節快樂", "中秋節快樂", "端午節快樂", "我愛你", "謝謝你的幫助", "天氣真好"]
+    // Level 2: Animals
+    ["貓咪", "狗狗", "老虎", "大象", "小鳥", "兔子", "馬兒", "牛隻", "羊群", "魚蝦"],
+    // Level 3: Home Appliances
+    ["電視", "冰箱", "冷氣", "風扇", "電鍋", "烤箱", "洗衣", "烘乾", "吸塵", "熱水"],
+    // Level 4: Anime/Manga Characters (Chinese names)
+    ["悟空", "鳴人", "魯夫", "炭治", "小智", "皮卡", "柯南", "多啦", "美戰", "火影"],
+    // Level 5: Common objects/places (3 characters)
+    ["公園", "學校", "商店", "醫院", "銀行", "餐廳", "飯店", "車站", "機場", "圖書"],
+    // Level 6: Actions/verbs (3 characters)
+    ["吃飯", "睡覺", "跑步", "跳舞", "唱歌", "畫畫", "讀書", "寫字", "運動", "學習"],
+    // Level 7: Adjectives/feelings (3 characters)
+    ["開心", "難過", "生氣", "害怕", "寂寞", "輕鬆", "緊張", "漂亮", "聰明", "勇敢"],
+    // Level 8: Foods/Drinks (3 characters)
+    ["咖啡", "牛奶", "果汁", "可樂", "啤酒", "麵包", "蛋糕", "餅乾", "水餃", "火鍋"],
+    // Level 9: Nature/Scenery (3 characters)
+    ["海洋", "高山", "河流", "湖泊", "森林", "沙漠", "天空", "白雲", "彩虹", "流星"],
+    // Level 10: Mixed challenging words (3 characters)
+    ["愛你", "加油", "感謝", "成功", "夢想", "希望", "未來", "奇蹟", "永恆", "幸福"]
 ];
 
 // Helper functions
@@ -128,6 +128,12 @@ restartButton.addEventListener('click', () => {
 textInput.addEventListener('input', (e) => {
     const typedText = e.target.value;
     if (typedText === currentWord) {
+        // Add a visual feedback effect
+        wordDisplay.classList.add('correct-feedback');
+        setTimeout(() => {
+            wordDisplay.classList.remove('correct-feedback');
+        }, 300); // Remove the class after 300ms
+
         const typingEndTime = new Date().getTime();
         const timeTaken = (typingEndTime - typingStartTime) / 1000;
         score += Math.max(0, 10 - Math.floor(timeTaken)); // Score based on speed
