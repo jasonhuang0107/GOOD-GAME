@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中文打字遊戲</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>中文打字遊戲</h1>
+        <div class="stats">
+            <p>分數: <span id="score">0</span></p>
+            <p>時間: <span id="time">0</span>s</p>
+            <p>關卡: <span id="level">1</span>/10</p>
+        </div>
+        <div class="word-display" id="word-display"></div>
+        <input type="text" class="text-input" id="text-input" placeholder="在這裡輸入中文" autofocus>
+        <div class="controls">
+            <button id="start-button">開始遊戲</button>
+            <div class="speed-controls">
+                <span>速度:</span>
+                <button id="speed-slow" class="active">慢</button>
+                <button id="speed-medium">中</button>
+                <button id="speed-fast">快</button>
+            </div>
+        </div>
+        <div class="game-over-screen" id="game-over-screen">
+            <h2>遊戲結束！</h2>
+            <p>最終分數: <span id="final-score">0</span></p>
+            <button id="restart-button">重新開始</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
